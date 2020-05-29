@@ -22,7 +22,7 @@ class Client():
         )['scan']
         hosts = [
             (ip, stats['hostnames'][0]['name'])
-            for ip, stats in scan.items() if stats['tcp'][8080]['state'] == 'open'
+            for ip, stats in scan.items() if stats['tcp'][SERVER_PORT]['state'] == 'open'
         ]
         return hosts
 

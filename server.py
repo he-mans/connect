@@ -26,7 +26,7 @@ class Server():
         conn: socket.socket
         addr: Tuple[str]
         conn, addr = self.socket.accept()
-        if addr[-1] != 8090:
+        if addr[-1] != CLIENT_PORT:
             return None
         self.conn = conn
         self.conn_addr = addr[0]
