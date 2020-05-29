@@ -18,10 +18,10 @@ class UI():
                 'click': False,
                 'choices': [
                     {
-                        'name': Action.SEND,
+                        'name': Action.SEND.value,
                     },
                     {
-                        'name': Action.RECEIVE
+                        'name': Action.RECEIVE.value
                     }
                 ]
             }
@@ -38,10 +38,10 @@ class UI():
                 'click': False,
                 'choices': [
                     {
-                        'name': FollowUpAction.SEND_ANOTHER,
+                        'name': FollowUpAction.SEND_ANOTHER.value,
                     },
                     {
-                        'name': FollowUpAction.RETURN_HOME,
+                        'name': FollowUpAction.RETURN_HOME.value,
                     }
                 ]
             }

@@ -8,8 +8,8 @@ from progress.spinner import Spinner
 
 
 class Action(str, Enum):
-    SEND: str = 'send'
-    RECEIVE: str = 'receive'
+    SEND: str = 'Send'
+    RECEIVE: str = 'Receive'
 
 
 class FollowUpAction(str, Enum):
