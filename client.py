@@ -6,14 +6,13 @@ from settings import *
 class Client():
     def __init__(self, ip: str):
         self.ip: str = ip
-        self.port: int = CLIENT_PORT
         self.init_socket()
 
     def init_socket(self):
         self.socket: socket.socket = socket.socket(
             socket.AF_INET, socket.SOCK_STREAM)
         self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        self.socket.bind(('0.0.0.0', self.port),)
+        self.socket.bind(('0.0.0.0', CLIENT_PORT),)
 
     def scan_network(self, network_ip: str):
         scanner = nmap.PortScanner()

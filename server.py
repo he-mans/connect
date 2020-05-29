@@ -10,7 +10,6 @@ class Server():
         self.conn: socket.socket = None
         self.conn_addr: str = None
         self.ip: str = ip
-        self.port: int = SERVER_PORT
         self.init_socket()
 
     def init_socket(self):
@@ -19,7 +18,7 @@ class Server():
             socket.SOCK_STREAM
         )
         self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        self.socket.bind((self.ip, self.port),)
+        self.socket.bind((self.ip, SERVER_PORT),)
         self.socket.listen(1)
 
     def connect_to_client(self):
