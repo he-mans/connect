@@ -46,6 +46,7 @@ class Connect:
             UI.stop_spinner(spinner)
             if len(hosts) == 0:
                 print("No devices found to receive files from")
+                return
             server_ip = UI.prompt_hosts(hosts)
             client.connect(server_ip)
 
