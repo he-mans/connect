@@ -15,6 +15,7 @@ class UI():
                 'type': 'list',
                 'name': 'action',
                 'message': 'What action do yo want to perform',
+                'click': False,
                 'choices': [
                     {
                         'name': Action.SEND,
@@ -34,6 +35,7 @@ class UI():
                 'type': 'list',
                 'name': 'follow_up_action',
                 'message': 'Send another file or go home',
+                'click': False,
                 'choices': [
                     {
                         'name': FollowUpAction.SEND_ANOTHER,
@@ -53,6 +55,7 @@ class UI():
                 'type': 'list',
                 'name': 'host',
                 'message': 'Which device do you want to connect to',
+                'click': False,
                 'choices': [{'name': f"{name} {ip}"} for ip, name in hosts]
 
             }
