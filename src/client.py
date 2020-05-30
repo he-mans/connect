@@ -1,6 +1,6 @@
 import nmap
 import socket
-from settings import *
+from .settings import *
 
 
 class Client():

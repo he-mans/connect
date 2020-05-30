@@ -1,9 +1,9 @@
 import nmap
 import socket
-from ui import UI
-from utils import *
-from server import Server
-from client import Client
+from .ui import UI
+from .utils import *
+from .server import Server
+from .client import Client
 
 
 class Connect:

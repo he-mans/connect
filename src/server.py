@@ -1,8 +1,8 @@
 import socket
 from typing import Tuple
 from time import sleep
-from utils import get_filename
-from settings import *
+from .utils import get_filename
+from .settings import *
 
 
 class Server():

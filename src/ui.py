@@ -1,5 +1,5 @@
 from PyInquirer import prompt
-from utils import Action, FollowUpAction, is_file, SpinnerThread
+from .utils import Action, FollowUpAction, is_file, SpinnerThread
 from typing import List, Dict
 from progress.spinner import Spinner
 from time import sleep
