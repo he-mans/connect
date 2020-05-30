@@ -4,7 +4,7 @@ SERVER_PORT: int = 8080
 
 CLIENT_PORT: int = 8090
 
-FIN_HEADER: bytes = b'FIN::          '
+FINISH_HEADER: bytes = b'FIN::          '
 
 DISPOSE_HEADER: bytes = b'DSP::          '
 

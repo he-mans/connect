@@ -37,18 +37,17 @@ class Client():
         with open(f'./received/{filename}', 'wb') as f:
             complete_data = b''
             data = self.socket.recv(BUFFER_SIZE)
-            complete_data += data
             while True:
+                complete_data += data
                 data = self.socket.recv(BUFFER_SIZE)
-                if data.endswith(FIN_HEADER):
+                if data.endswith(FINISH_HEADER):
                     self.socket.sendall(b'ack')
                     break
-                complete_data += data
             f.write(complete_data)
 
     def listen_server_status(self):
-        header = self.socket.recv(BUFFER_SIZE)
-        if header == DISPOSE_HEADER:
+        status: bytes = self.socket.recv(BUFFER_SIZE)
+        if status.endswith(DISPOSE_HEADER):
             self.dispose()
 
     @property

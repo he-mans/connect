@@ -43,7 +43,7 @@ class Server():
             while data:
                 self.conn.sendall(data)
                 data = f.read(BUFFER_SIZE)
-            self.conn.sendall(FIN_HEADER)
+            self.conn.sendall(FINISH_HEADER)
             self.conn.recv(BUFFER_SIZE)
 
     def notify_client(self, dispose=False):

@@ -8,6 +8,11 @@ from tkinter import filedialog
 
 
 class UI():
+
+    @staticmethod
+    def display_message(message: str):
+        print(message)
+
     @staticmethod
     def prompt_action():
         questions: List[Dict[str, Any]] = [
