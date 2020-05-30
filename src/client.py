@@ -34,7 +34,7 @@ class Client():
         self.socket.sendall(b'ack')
 
         # receiving file
-        with open(f'./received/{filename}', 'wb') as f:
+        with open(f'./../received/{filename}', 'wb') as f:
             complete_data = b''
             data = self.socket.recv(BUFFER_SIZE)
             while True:
