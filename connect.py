@@ -23,7 +23,7 @@ class Connect:
                 while not server.is_connected:
                     server.connect_to_client()
                 UI.stop_spinner(spinner)
-                print(f'Connected to {server.conn_addr}')
+                UI.display_message(f'Connected to {server.conn_addr}')
 
                 skip_prompt = True
                 while skip_prompt or UI.prompt_follow_up_action() != FollowUpAction.RETURN_HOME:
@@ -33,7 +33,7 @@ class Connect:
                     spinner: SpinnerThread = UI.get_spinner('Sending File')
                     server.transfer_file(filepath)
                     UI.stop_spinner(spinner)
-                    print("Done")
+                    UI.display_message("Done")
 
                 server.notify_client(dispose=True)
                 server.dispose()
@@ -45,7 +45,7 @@ class Connect:
             hosts = client.scan_network(self.network_ip)
             UI.stop_spinner(spinner)
             if len(hosts) == 0:
-                print("No devices found to receive files from")
+                UI.display_message("No devices found to receive files from")
                 return
             server_ip = UI.prompt_hosts(hosts)
             client.connect(server_ip)
@@ -54,12 +54,12 @@ class Connect:
                 spinner: SpinnerThread = UI.get_spinner('Receiving File')
                 client.receive_file()
                 UI.stop_spinner(spinner)
-                print('Done')
+                UI.display_message('Done')
                 spinner: SpinnerThread = UI.get_spinner('Waiting for sender')
                 client.listen_server_status()
                 UI.stop_spinner(spinner)
 
-            print("Connection closed by sender")
+            UI.display_message("Connection closed by sender")
 
 
 if __name__ == "__main__":
