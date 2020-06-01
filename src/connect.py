@@ -27,12 +27,10 @@ class Connect:
 
                 skip_prompt = True
                 while skip_prompt or UI.prompt_follow_up_action() != FollowUpAction.RETURN_HOME:
-                    server.notify_client() if not skip_prompt else None
                     skip_prompt = False
                     filepath = UI.get_file()
-                    spinner: SpinnerThread = UI.get_spinner('Sending File')
+                    server.notify_client()
                     server.transfer_file(filepath)
-                    UI.stop_spinner(spinner)
                     UI.display_message("Done")
 
                 server.notify_client(dispose=True)
@@ -51,17 +49,10 @@ class Connect:
             client.connect(server_ip)
 
             while client.is_connected:
-                spinner: SpinnerThread = UI.get_spinner('Receiving File')
-                client.receive_file()
-                UI.stop_spinner(spinner)
-                UI.display_message('Done')
                 spinner: SpinnerThread = UI.get_spinner('Waiting for sender')
                 client.listen_server_status()
                 UI.stop_spinner(spinner)
+                client.receive_file() if client.is_connected else None
+                UI.display_message('Done')
 
             UI.display_message("Connection closed by sender")
-
-
-if __name__ == "__main__":
-    app = Connect()
-    app.start()

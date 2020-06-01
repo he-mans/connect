@@ -1,8 +1,10 @@
 import socket
 from typing import Tuple
 from time import sleep
+import os
 from .utils import get_filename
 from .settings import *
+from .ui import UI
 
 
 class Server():
@@ -36,17 +38,27 @@ class Server():
         self.conn.sendall(filename.encode())
         self.conn.recv(BUFFER_SIZE)
 
+        # sending file size
+        filesize: int = os.stat(filepath).st_size
+        self.conn.sendall(str(filesize).encode())
+        self.conn.recv(BUFFER_SIZE)
+
+        progress = UI.progress_bar("Sending file", filesize)
+        progress.next()
+
         # sending file
         with open(filepath, 'rb') as f:
             data = f.read(BUFFER_SIZE)
-            sleep(3)
             while data:
+                sleep(1)
                 self.conn.sendall(data)
+                progress.next(len(data))
                 data = f.read(BUFFER_SIZE)
+            progress.finish()
             self.conn.sendall(FINISH_HEADER)
             self.conn.recv(BUFFER_SIZE)
 
-    def notify_client(self, dispose=False):
+    def notify_client(self, cont=True, dispose=False):
         if dispose:
             self.conn.sendall(DISPOSE_HEADER)
         else:

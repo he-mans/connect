@@ -2,6 +2,7 @@ from PyInquirer import prompt
 from .utils import Action, FollowUpAction, is_file, SpinnerThread
 from typing import List, Dict
 from progress.spinner import Spinner
+from progress.bar import IncrementalBar
 from time import sleep
 import tkinter as tk
 from tkinter import filedialog
@@ -89,3 +90,7 @@ class UI():
         spinner.stop()
         sleep(.1)
         print('\n')
+
+    @staticmethod
+    def progress_bar(message: str, _max: int):
+        return IncrementalBar(message, max=_max)

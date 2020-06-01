@@ -1,6 +1,7 @@
 import nmap
 import socket
 from .settings import *
+from .ui import UI
 
 
 class Client():
@@ -33,12 +34,21 @@ class Client():
         filename = self.socket.recv(BUFFER_SIZE).decode('utf-8')
         self.socket.sendall(b'ack')
 
+        # receiving file size
+        filesize = self.socket.recv(BUFFER_SIZE)
+        self.socket.sendall(b'ack')
+        filesize = int(filesize.decode('utf-8'))
+
+        progress = UI.progress_bar("Receiving file", filesize)
+        progress.next()
+
         # receiving file
-        with open(f'./../received/{filename}', 'wb') as f:
+        with open(f'./received/{filename}', 'wb') as f:
             complete_data = b''
             data = self.socket.recv(BUFFER_SIZE)
             while True:
                 complete_data += data
+                progress.next(len(data))
                 data = self.socket.recv(BUFFER_SIZE)
                 if data.endswith(FINISH_HEADER):
                     self.socket.sendall(b'ack')
